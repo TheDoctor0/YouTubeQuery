@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="YouTubeQuery.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YouTubeQuery"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Label x:Name="Label" Content="API Key:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="82"/>
+        <TextBox x:Name="ApiKey" Height="23" Margin="60,12,48,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="ApiKey_TextChanged"/>
+        <Button x:Name="PickPath" Content="Get API Key" HorizontalAlignment="Right" Margin="5,12,10,0" VerticalAlignment="Top" Width="75" Height="23" Click="GetApiKey_Click"/>
+    </Grid>
+</UserControl>
