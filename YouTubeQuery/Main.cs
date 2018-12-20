@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using Wox.Plugin;
@@ -8,7 +9,6 @@ namespace YouTubeQuery
 {
     public class Main : IPlugin, ISettingProvider
     {
-        private string _videoId;
         private Options options { get; set; }
 
         public void Init(PluginInitContext context)
@@ -31,20 +31,23 @@ namespace YouTubeQuery
             var results = new List<Result>();
             var urlBuilder = new UrlBuilder(query.Search, options.ApiKey);
 
-            using (var webClient = new System.Net.WebClient()) {
+            using (var webClient = new System.Net.WebClient { Encoding = System.Text.Encoding.UTF8 }) {
                var response = JsonConvert.DeserializeObject<ApiResponse>(
                    webClient.DownloadString(urlBuilder.ApiUrl)
                );
 
-               foreach (var item in response.items) {
-                   item.id.TryGetValue("videoId", out _videoId);
+               foreach (var item in response.items)
+               {
+                   string videoId;
+                   item.id.TryGetValue("videoId", out videoId);
+                   var publishedAt = DateTime.Parse(item.snippet.publishedAt).ToString("yyyy-MM-dd");
 
                    results.Add(new Result() {
                        Title = item.snippet.title,
-                       SubTitle = item.snippet.channelTitle,
+                       SubTitle = item.snippet.channelTitle + " (" + publishedAt + ")",
                        IcoPath = "icon.png",
                        Action = e => {
-                           System.Diagnostics.Process.Start(UrlBuilder.Url + _videoId);
+                           System.Diagnostics.Process.Start(UrlBuilder.Url + videoId);
 
                            return true;
                        }
