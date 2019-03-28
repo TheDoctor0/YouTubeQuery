@@ -6,7 +6,7 @@ Public YouTube API key is provided, if it won't work in the future
 feel free to generate your own key and set in in plugin settings.
 
 ## Demo
-![](https://i.imgur.com/tflkRPO.png)
+![](https://i.imgur.com/ypGEIHs.png)
 
 ## Documentation
 - [Youtube API v3](https://developers.google.com/youtube/v3/getting-started)
