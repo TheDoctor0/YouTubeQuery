@@ -4,7 +4,7 @@
     "Name":"YouTubeQuery",
     "Description":"Quickly search YouTube videos in Wox",
     "Author":"TheDoctor0",
-    "Version":"1.0.1",
+    "Version":"1.1.0",
     "Language":"csharp",
     "Website":"https://github.com/TheDoctor0/YoutubeQuery",
     "ExecuteFileName":"YoutubeQuery.dll",

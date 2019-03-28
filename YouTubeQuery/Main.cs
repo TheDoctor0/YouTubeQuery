@@ -10,13 +10,26 @@ namespace YouTubeQuery
     public class Main : IPlugin, ISettingProvider
     {
         private Options options { get; set; }
+        private string _thumbnailsPath;
 
         public void Init(PluginInitContext context)
         {
-            options = new Options(context != null 
-                ? Path.Combine(context.CurrentPluginMetadata.PluginDirectory, "options.json") 
-                : "options.json"
-            );
+            if (context != null) {
+                options = new Options(Path.Combine(context.CurrentPluginMetadata.PluginDirectory, "options.json"));
+                _thumbnailsPath = Path.Combine(context.CurrentPluginMetadata.PluginDirectory, "thumbnails");
+
+                if (!Directory.Exists(_thumbnailsPath)) {
+                    Directory.CreateDirectory(_thumbnailsPath);
+                }
+
+                var files = Directory.GetFiles(_thumbnailsPath, "*.jpg");
+
+                foreach (var file in files) {
+                    File.Delete(file);
+                }
+            } else {
+                options = new Options("options.json");
+            }
             
             options.Load();
         }
@@ -36,16 +49,25 @@ namespace YouTubeQuery
                    webClient.DownloadString(urlBuilder.ApiUrl)
                );
 
-               foreach (var item in response.items)
-               {
+               foreach (var item in response.items) {
                    string videoId;
                    item.id.TryGetValue("videoId", out videoId);
+                   
                    var publishedAt = DateTime.Parse(item.snippet.publishedAt).ToString("yyyy-MM-dd");
+                   var icoPath = "icon.png";
+
+                   if (options.Thumbnails && !string.IsNullOrEmpty(_thumbnailsPath)) {
+                       icoPath = Path.Combine(_thumbnailsPath, videoId + ".jpg");
+
+                       if (!File.Exists(icoPath)) {
+                           webClient.DownloadFile(new Uri("https://i.ytimg.com/vi/" + videoId + "/default.jpg"), icoPath);
+                       }
+                   }
 
                    results.Add(new Result() {
                        Title = item.snippet.title,
                        SubTitle = item.snippet.channelTitle + " (" + publishedAt + ")",
-                       IcoPath = "icon.png",
+                       IcoPath = icoPath,
                        Action = e => {
                            System.Diagnostics.Process.Start(UrlBuilder.Url + videoId);
 

@@ -7,8 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Label x:Name="Label" Content="API Key:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="82"/>
-        <TextBox x:Name="ApiKey" Height="23" Margin="60,12,48,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="ApiKey_TextChanged"/>
+        <Label x:Name="LabelApiKey" Content="API Key:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="82"/>
+        <TextBox x:Name="ApiKey" Height="23" Margin="85,12,48,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="ApiKey_TextChanged"/>
         <Button x:Name="PickPath" Content="Get API Key" HorizontalAlignment="Right" Margin="5,12,10,0" VerticalAlignment="Top" Width="75" Height="23" Click="GetApiKey_Click"/>
+        <Label x:Name="LabelThumbnails" Content="Thumbnails:" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="82"/>
+        <CheckBox Name="ThumbnailsEnabled" Click="ThumbnailsEnabled_Click" Margin="84,41,0,0" />
     </Grid>
 </UserControl>

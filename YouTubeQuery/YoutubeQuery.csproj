@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Options.cs" />
     <Compile Include="Snippet.cs" />
-    <Compile Include="Thumbnails.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="UrlBuilder.cs" />
     <Compile Include="ApiResponse.cs" />

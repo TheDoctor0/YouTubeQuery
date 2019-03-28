@@ -12,8 +12,8 @@ namespace YouTubeQuery
 	{
 		private readonly string _filePath;
 
-		[JsonProperty]
-		public string ApiKey { get; set; }
+		public string ApiKey;
+		public bool Thumbnails;
 
 		public Options(string path)
 		{
@@ -27,6 +27,7 @@ namespace YouTubeQuery
 			var loaded = JsonConvert.DeserializeObject<Options>(File.ReadAllText(_filePath));
 
 			ApiKey = loaded.ApiKey;
+			Thumbnails = loaded.Thumbnails;
 		}
 
 		public void Save()
