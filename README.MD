@@ -10,7 +10,7 @@ feel free to generate your own key and set in in plugin settings.
 
 ## Documentation
 - [Youtube API v3](https://developers.google.com/youtube/v3/getting-started)
-- [Wox Documentation](http://doc.getwox.com/en/)
+- [Wox Docs](http://doc.wox.one/en/)
 
 ## Credits
 [suteudragos](https://github.com/suteudragos) for original Youtube Query plugin.
